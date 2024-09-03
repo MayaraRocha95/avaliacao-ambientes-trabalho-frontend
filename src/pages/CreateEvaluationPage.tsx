@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import RatingStars from '../components/RatingStars';
+import api from '../api'; // Importando a instância do axios
 
 const CreateEvaluationPage: React.FC = () => {
   const [nomeEmpresa, setNomeEmpresa] = useState('');
@@ -28,21 +29,25 @@ const CreateEvaluationPage: React.FC = () => {
     setRatings({ ...ratings, [name]: value });
   };
 
-  const handleSubmit = () => {
-    // Lógica para enviar a avaliação
-    console.log({
-      nomeEmpresa,
-      cargo,
-      nivel,
-      anonimo,
-      nomeAutor: anonimo ? 'Anônimo' : nomeAutor,
-      titulo,
-      texto,
-      ...ratings
-    });
-
-    // Após enviar, você pode navegar de volta para a página inicial, se desejar
-    navigate('/');
+  const handleSubmit = async () => {
+    try {
+      // Enviando os dados para a API
+      await api.post('/avaliacoes', {
+        nomeEmpresa,
+        cargo,
+        nivel,
+        anonimo,
+        nomeAutor: anonimo ? 'Anônimo' : nomeAutor,
+        titulo,
+        texto,
+        ...ratings
+      });
+      
+      // Redireciona para a página inicial após o envio bem-sucedido
+      navigate('/');
+    } catch (error) {
+      console.error('Erro ao enviar avaliação:', error);
+    }
   };
 
   const handleBack = () => {
@@ -121,7 +126,7 @@ const CreateEvaluationPage: React.FC = () => {
           <label>Qualidade de Vida:</label>
           <RatingStars onRatingChange={(value) => handleRatingChange('qualidadeVida', value)} />
         </div>
-        <div style={{ display: 'flex',  marginTop: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
           <button type="button" onClick={handleBack}>Voltar</button>
           <button type="submit">Enviar</button>
         </div>

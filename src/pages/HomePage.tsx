@@ -1,29 +1,43 @@
-import React, { useState } from 'react';
+// src/pages/HomePage.tsx
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import RatingStars from '../components/RatingStars';
+import api from '../api';
+
+interface Evaluation {
+  nomeEmpresa: string;
+  cargo: string;
+  nivel: string;
+  nomeAutor: string;
+  titulo: string;
+  texto: string;
+  oportunidadesCarreira: number;
+  remuneracaoBeneficios: number;
+  culturaValores: number;
+  liderancaAlta: number;
+  diversidadeInclusao: number;
+  auxilioCreche: number;
+  salario: number;
+  qualidadeVida: number;
+}
 
 const HomePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [evaluations, setEvaluations] = useState([
-    // Avaliações simuladas para exibição
-    {
-      nomeEmpresa: 'TechCorp',
-      cargo: 'Desenvolvedor',
-      nivel: 'Júnior',
-      nomeAutor: 'Maria Silva',
-      titulo: 'Ótimo lugar para trabalhar',
-      texto: 'Adorei a cultura e a equipe.',
-      oportunidadesCarreira: 4,
-      remuneracaoBeneficios: 5,
-      culturaValores: 5,
-      liderancaAlta: 4,
-      diversidadeInclusao: 5,
-      auxilioCreche: 4,
-      salario: 4,
-      qualidadeVida: 4
-    }
-  ]);
+  const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
+
+  useEffect(() => {
+    const fetchEvaluations = async () => {
+      try {
+        const response = await api.get('/avaliacoes');
+        setEvaluations(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar avaliações:', error);
+      }
+    };
+
+    fetchEvaluations();
+  }, []);
 
   const filteredEvaluations = evaluations.filter(evaluation =>
     evaluation.nomeEmpresa.toLowerCase().includes(searchTerm.toLowerCase())
