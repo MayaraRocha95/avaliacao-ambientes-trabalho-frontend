@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import RatingStars from '../components/RatingStars';
 import api from '../api';
+import './homepage.css';
 
 interface Evaluation {
   nomeEmpresa: string;
@@ -44,11 +45,11 @@ const HomePage: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className='body'>
       <Header />
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+      <div className="first-box">
         <Link to="/create-evaluation">Criar Avaliação</Link>
-        <div>
+        <div className="search-box">
           <span>Pesquisar Empresa</span>
           <input
             type="text"
@@ -61,24 +62,24 @@ const HomePage: React.FC = () => {
       </div>
       <div>
         {filteredEvaluations.map((evaluation, index) => (
-          <div key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', border: '1px solid #ddd', marginBottom: '10px' }}>
-            <div>
+          <div key={index} className='box-avalia'>
+            <div className='box-left'>
               <h3>{evaluation.nomeEmpresa}</h3>
-              <p>Cargo: {evaluation.cargo}</p>
-              <p>Nível: {evaluation.nivel}</p>
-              <p>Nome: {evaluation.nomeAutor}</p>
-              <p>Título: {evaluation.titulo}</p>
-              <p>Texto: {evaluation.texto}</p>
+              <p>{evaluation.cargo}</p>
+              <p>{evaluation.nivel}</p>
+              <p>{evaluation.nomeAutor}</p>
+              <h4> {evaluation.titulo}</h4>
+              <p>{evaluation.texto}</p>
             </div>
-            <div>
-              <p>Oportunidades de Carreira: <RatingStars onRatingChange={() => { }} initialValue={evaluation.oportunidadesCarreira} /></p>
-              <p>Remuneração e Benefícios: <RatingStars onRatingChange={() => { }} initialValue={evaluation.remuneracaoBeneficios} /></p>
-              <p>Cultura e Valores: <RatingStars onRatingChange={() => { }} initialValue={evaluation.culturaValores} /></p>
-              <p>Liderança Alta: <RatingStars onRatingChange={() => { }} initialValue={evaluation.liderancaAlta} /></p>
-              <p>Diversidade e Inclusão: <RatingStars onRatingChange={() => { }} initialValue={evaluation.diversidadeInclusao} /></p>
-              <p>Auxílio Creche: <RatingStars onRatingChange={() => { }} initialValue={evaluation.auxilioCreche} /></p>
-              <p>Salário: <RatingStars onRatingChange={() => { }} initialValue={evaluation.salario} /></p>
-              <p>Qualidade de Vida: <RatingStars onRatingChange={() => { }} initialValue={evaluation.qualidadeVida} /></p>
+            <div className='box-right'>
+              <p>Oportunidades de Carreira: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.oportunidadesCarreira} /></p>
+              <p>Remuneração e Benefícios: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.remuneracaoBeneficios} /></p>
+              <p>Cultura e Valores: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.culturaValores} /></p>
+              <p>Liderança Alta: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.liderancaAlta} /></p>
+              <p>Diversidade e Inclusão: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.diversidadeInclusao} /></p>
+              <p>Auxílio Creche: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.auxilioCreche} /></p>
+              <p>Salário: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.salario} /></p>
+              <p>Qualidade de Vida: <RatingStars readOnly={true} onRatingChange={() => { }} initialValue={evaluation.qualidadeVida} /></p>
             </div>
           </div>
         ))}
