@@ -31,6 +31,7 @@ body {
 .search-box {
   font-weight: 600;
   input {
+    width: 50%;
     border-radius: 5px;
     text-decoration: none;
     height: 20px;

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import RatingStars from '../components/RatingStars';
-import api from '../api'; // Importando a instância do axios
+import api from '../api';
+import './form.css';
 
 const CreateEvaluationPage: React.FC = () => {
   const [nomeEmpresa, setNomeEmpresa] = useState('');
@@ -23,7 +24,7 @@ const CreateEvaluationPage: React.FC = () => {
     qualidadeVida: 0
   });
 
-  const navigate = useNavigate(); // Hook para navegação
+  const navigate = useNavigate();
 
   const handleRatingChange = (name: string, value: number) => {
     setRatings({ ...ratings, [name]: value });
@@ -31,7 +32,6 @@ const CreateEvaluationPage: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      // Enviando os dados para a API
       await api.post('/avaliacoes', {
         nomeEmpresa,
         cargo,
@@ -42,8 +42,6 @@ const CreateEvaluationPage: React.FC = () => {
         texto,
         ...ratings
       });
-      
-      // Redireciona para a página inicial após o envio bem-sucedido
       navigate('/');
     } catch (error) {
       console.error('Erro ao enviar avaliação:', error);
@@ -51,24 +49,34 @@ const CreateEvaluationPage: React.FC = () => {
   };
 
   const handleBack = () => {
-    navigate('/'); // Navegar de volta para a página inicial
+    navigate('/');
   };
 
   return (
-    <div>
+    <div className="container supernova">
       <Header />
-      <h1>Criar Avaliação</h1>
-      <form onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
+      <h1 className="form-header-group">Criar Avaliação</h1>
+      <form className="form-all" onSubmit={e => { e.preventDefault(); handleSubmit(); }}>
         <div>
-          <label>Nome da Empresa:</label>
-          <input type="text" value={nomeEmpresa} onChange={e => setNomeEmpresa(e.target.value)} required />
+          <label className="form-sub-label">Nome da Empresa:</label>
+          <input
+            type="text"
+            value={nomeEmpresa}
+            onChange={e => setNomeEmpresa(e.target.value)}
+            required
+          />
         </div>
         <div>
-          <label>Cargo:</label>
-          <input type="text" value={cargo} onChange={e => setCargo(e.target.value)} required />
+          <label className="form-sub-label">Cargo:</label>
+          <input
+            type="text"
+            value={cargo}
+            onChange={e => setCargo(e.target.value)}
+            required
+          />
         </div>
         <div>
-          <label>Nível:</label>
+          <label className="form-sub-label">Nível:</label>
           <select value={nivel} onChange={e => setNivel(e.target.value)} required>
             <option value="Júnior">Júnior</option>
             <option value="Pleno">Pleno</option>
@@ -76,59 +84,103 @@ const CreateEvaluationPage: React.FC = () => {
           </select>
         </div>
         <div>
-          <label>Anônimo:</label>
-          <input type="radio" name="anonimo" value="sim" checked={anonimo} onChange={() => setAnonimo(true)} /> Sim
-          <input type="radio" name="anonimo" value="nao" checked={!anonimo} onChange={() => setAnonimo(false)} /> Não
+          <label className="form-sub-label">Anônimo:</label>
+          <input
+            type="radio"
+            name="anonimo"
+            value="sim"
+            checked={anonimo}
+            onChange={() => setAnonimo(true)}
+          /> Sim
+          <input
+            type="radio"
+            name="anonimo"
+            value="nao"
+            checked={!anonimo}
+            onChange={() => setAnonimo(false)}
+          /> Não
         </div>
         {!anonimo && (
           <div>
-            <label>Nome do Autor:</label>
-            <input type="text" value={nomeAutor} onChange={e => setNomeAutor(e.target.value)} required />
+            <label className="form-sub-label">Nome do Autor:</label>
+            <input
+              type="text"
+              value={nomeAutor}
+              onChange={e => setNomeAutor(e.target.value)}
+              required
+            />
           </div>
         )}
         <div>
-          <label>Título:</label>
-          <input type="text" value={titulo} onChange={e => setTitulo(e.target.value)} maxLength={100} required />
+          <label className="form-sub-label">Título:</label>
+          <input
+            type="text"
+            value={titulo}
+            onChange={e => setTitulo(e.target.value)}
+            maxLength={100}
+            required
+          />
         </div>
         <div>
-          <label>Texto:</label>
-          <textarea value={texto} onChange={e => setTexto(e.target.value)} maxLength={500} required></textarea>
+          <label className="form-sub-label">Texto:</label>
+          <textarea
+            value={texto}
+            onChange={e => setTexto(e.target.value)}
+            maxLength={500}
+            required
+          />
         </div>
         <div>
-          <label>Oportunidades de Carreira:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('oportunidadesCarreira', value)} />
+          <label className="form-sub-label">Oportunidades de Carreira:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('oportunidadesCarreira', value)}
+          />
         </div>
         <div>
-          <label>Remuneração e Benefícios:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('remuneracaoBeneficios', value)} />
+          <label className="form-sub-label">Remuneração e Benefícios:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('remuneracaoBeneficios', value)}
+          />
         </div>
         <div>
-          <label>Cultura e Valores:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('culturaValores', value)} />
+          <label className="form-sub-label">Cultura e Valores:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('culturaValores', value)}
+          />
         </div>
         <div>
-          <label>Liderança Alta:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('liderancaAlta', value)} />
+          <label className="form-sub-label">Liderança Alta:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('liderancaAlta', value)}
+          />
         </div>
         <div>
-          <label>Diversidade e Inclusão:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('diversidadeInclusao', value)} />
+          <label className="form-sub-label">Diversidade e Inclusão:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('diversidadeInclusao', value)}
+          />
         </div>
         <div>
-          <label>Auxílio Creche:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('auxilioCreche', value)} />
+          <label className="form-sub-label">Auxílio Creche:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('auxilioCreche', value)}
+          />
         </div>
         <div>
-          <label>Salário:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('salario', value)} />
+          <label className="form-sub-label">Salário:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('salario', value)}
+          />
         </div>
         <div>
-          <label>Qualidade de Vida:</label>
-          <RatingStars onRatingChange={(value) => handleRatingChange('qualidadeVida', value)} />
+          <label className="form-sub-label">Qualidade de Vida:</label>
+          <RatingStars
+            onRatingChange={(value) => handleRatingChange('qualidadeVida', value)}
+          />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-          <button type="button" onClick={handleBack}>Voltar</button>
-          <button type="submit">Enviar</button>
+          <button className="button-back" type="button" onClick={handleBack}>Voltar</button>
+          <button className="button-submit" type="submit">Enviar</button>
         </div>
       </form>
     </div>
