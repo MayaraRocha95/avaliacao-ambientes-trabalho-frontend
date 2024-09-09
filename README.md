@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Elas Avaliam
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descrição do Projeto
 
-## Available Scripts
+O **Elas Avaliam** é uma plataforma projetada para permitir que mulheres avaliem ambientes de trabalho. O objetivo é fornecer um espaço seguro para que possam compartilhar suas experiências, ajudando outras mulheres a encontrar empresas que promovem a inclusão, a diversidade e o bem-estar no ambiente corporativo. Usuárias podem optar por fazer avaliações anônimas ou assinar com seus próprios nomes.
 
-In the project directory, you can run:
+## Tecnologias Usadas
 
-### `npm start`
+- **Node.js**: Back-end da aplicação.
+- **NestJS**: Framework para criar a API.
+- **React**: Front-end da aplicação.
+- **TypeScript**: Usado tanto no back-end quanto no front-end para fornecer tipagem estática.
+- **PostgreSQL**: Banco de dados utilizado para armazenar as avaliações.
+- **Axios**: Biblioteca para fazer as requisições HTTP no front-end.
+- **React Simple Star Rating**: Componente para implementar a funcionalidade de avaliações com estrelas.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Funcionalidades das Páginas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Página Inicial
 
-### `npm test`
+A **Página Inicial** exibe uma lista de todas as avaliações cadastradas, permitindo que os usuários pesquisem empresas específicas pelo nome. Ela inclui uma barra de pesquisa no topo, onde o usuário pode buscar pelas avaliações de uma empresa específica. Além disso, há um link para criar uma nova avaliação.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Página Inicial](./public/paginahome.png)
 
-### `npm run build`
+### Página de Criar Avaliação
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A **Página de Criar Avaliação** permite que o usuário preencha um formulário com informações sobre a empresa que deseja avaliar. O formulário contém os seguintes campos:
+- Nome da Empresa
+- Cargo
+- Nível (Júnior, Pleno, Sênior)
+- Opção para Anônimo ou com Nome do Autor
+- Título da Avaliação
+- Texto descritivo da avaliação
+- Avaliação por estrelas em várias categorias (Oportunidades de Carreira, Remuneração, Cultura, Liderança, etc.)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Após o preenchimento, o usuário pode submeter a avaliação, que será listada na página inicial.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Página Criar Avaliação](./public/paginaform.png)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Criado por Mayara Rocha 🌼
