@@ -1,5 +1,6 @@
 # Elas Avaliam
 
+
 ## Descrição do Projeto
 
 O **Elas Avaliam** é uma plataforma projetada para permitir que mulheres avaliem ambientes de trabalho. O objetivo é fornecer um espaço seguro para que possam compartilhar suas experiências, ajudando outras mulheres a encontrar empresas que promovem a inclusão, a diversidade e o bem-estar no ambiente corporativo. Usuárias podem optar por fazer avaliações anônimas ou assinar com seus próprios nomes.
